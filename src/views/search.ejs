@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Crawlers / <%= query %></title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body style="color: #fff !important;font-family: Lato, Roboto,Helvetica,Arial,sans-serif;background: #282b30;">
+    <nav class="navbar navbar-light navbar-expand-md" style="background: #36393e;box-shadow: 2px 2px 20px rgb(0 0 0 / 10%);min-height: 56px;">
+        <div class="container-fluid"><a class="navbar-brand" href="/" style="color: rgb(255,255,255);">Crawlers</a></div>
+    </nav>
+    <div style="display: flex;padding-top: 100px;padding-left: 56px;padding-right: 56px;">
+        <div class="form-group pulse animated" style="width: 600px;">
+            <form style="display: flex;" id='form'><input class="form-control" type="text" value='<%= query %>' id='search' autocomplete="off" placeholder="Search Query" style="padding: 10px;padding-left: 20px;background: #36393e;color: rgb(238,238,238);"><button class="btn btn-primary" type="button" style="border-color: rgb(0, 150, 136);border-top-color: rgb(0,;border-right-color: 150,;border-bottom-color: 136);border-left-color: 150,;margin-bottom: 0px;background: #36393e;"><i class="fa fa-heart"></i></button><button class="btn btn-primary" type="button" style="border-color: rgb(0, 150, 136);border-top-color: rgb(0,;border-right-color: 150,;border-bottom-color: 136);border-left-color: 150,;margin-bottom: 0px;background: #36393e;"><i class="fa fa-search"></i></button></form>
+        </div>
+    </div>
+    <!-- <div style="display: flex;padding-left: 56px;padding-right: 56px;margin-bottom: 15px;">
+        <div class="card">
+            <div class="card-body" style="width: 600px;background: #36393e;">
+                <h6 class="text-muted card-subtitle mb-2">Instant Answer</h6>
+                <h4 class="card-title">13</h4>
+                <h6 class="text-muted card-subtitle mb-2">12+1</h6>
+            </div>
+        </div>
+    </div> -->
+    <div>
+        <% results.forEach(function(result){ %>
+            <%- `<div style="padding-right: 46px;padding-left: 56px;"><p style="margin-bottom: 0px;opacity: 0.50;font-size: 14px;">${result.link.split('/')[2]}</p><p style="margin-bottom: 0px;"><a href="${result.link}">${result.title}<br></a></p><p style="opacity: 0.50;">${result.snippet}</p></div>` %>
+        <% }); %>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src='/assets/js/search.js'></script>
+    <script defer src='/assets/js/autocomplete.js'></script>
+</body>
+
+</html>
