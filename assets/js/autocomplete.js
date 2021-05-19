@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	document.getElementsByClassName('form-group')[0].innerHTML += `<div class="autocomplete-items" style='background: #36393e; margin-bottom: 5px; text-align: left;'></div>`;
 	document.getElementById('search').addEventListener('keyup', () => {
 		fetch('/autocomplete?q=' + document.getElementById('search').value).then(resp => resp.json()).then(data => {
-			console.log(data.length)
 			if (data.length !== 0) {
 				document.getElementsByClassName('autocomplete-items')[0].innerHTML = '';
 				data.forEach((a) => {
