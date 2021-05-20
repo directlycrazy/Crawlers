@@ -31,15 +31,16 @@ fs.readFile('bangs.json', (err, data) => {
 	var bangs = JSON.parse(data);
 	router.get('/', (req, res) => {
 		if (req.query.q) {
-			if (bangs[req.query.q.slice(1).split(' ')[0]]) {
-				return res.redirect(bangs[req.query.q.split(' ')[0].slice(1)].replace('{{{s}}}', req.query.q.replace(req.query.q.split(' ')[0] + ' ', "")))
-			} else {
-				google({ 'query': req.query.q, disableConsole: true }).then(r => {
-					return res.render('search.ejs', { results: r, query: req.query.q });
-				}).catch((e) => {
-					return console.error(e);
-				});
+			if (req.query.q.startsWith('!')) {
+				if (bangs[req.query.q.slice(1).split(' ')[0]]) {
+					return res.redirect(bangs[req.query.q.split(' ')[0].slice(1)].replace('{{{s}}}', req.query.q.replace(req.query.q.split(' ')[0] + ' ', "")))
+				}
 			}
+			google({ 'query': req.query.q, disableConsole: true }).then(r => {
+				return res.render('search.ejs', { results: r, query: req.query.q });
+			}).catch((e) => {
+				return console.error(e);
+			});
 		} else {
 			return res.redirect('/');
 		}
