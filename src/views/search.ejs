@@ -25,15 +25,9 @@
             <form style="display: flex;" id='form'><input class="form-control" type="text" value='<%= query %>' id='search' autocomplete="off" placeholder="Search Query" style="padding: 10px;padding-left: 20px;background: #36393e;color: rgb(238,238,238);"><button class="btn btn-primary" type="button" style="border-color: rgb(0, 150, 136);border-top-color: rgb(0,;border-right-color: 150,;border-bottom-color: 136);border-left-color: 150,;margin-bottom: 0px;background: #36393e;"><i class="fa fa-heart"></i></button><button class="btn btn-primary" type="button" style="border-color: rgb(0, 150, 136);border-top-color: rgb(0,;border-right-color: 150,;border-bottom-color: 136);border-left-color: 150,;margin-bottom: 0px;background: #36393e;"><i class="fa fa-search"></i></button></form>
         </div>
     </div>
-    <!-- <div style="display: flex;padding-left: 56px;padding-right: 56px;margin-bottom: 15px;">
-        <div class="card">
-            <div class="card-body" style="width: 600px;background: #36393e;">
-                <h6 class="text-muted card-subtitle mb-2">Instant Answer</h6>
-                <h4 class="card-title">13</h4>
-                <h6 class="text-muted card-subtitle mb-2">12+1</h6>
-            </div>
-        </div>
-    </div> -->
+    <div style="display: flex;padding-left: 56px;padding-right: 56px;margin-bottom: 15px;" id='instant'>
+        
+    </div>
     <div>
         <% results.forEach(function(result){ %>
             <%- `<div style="padding-right: 46px;padding-left: 56px; max-width: 48em;"><p style="margin-bottom: 0px;opacity: 0.50;font-size: 14px;">${result.link.includes('www.google.com/aclk') ? "<strong>Ad</strong> - " : ""}${result.link.split('/')[2]}</p><p style="margin-bottom: 0px;"><a href="${result.link}">${result.title}<br></a></p><p style="opacity: 0.50;">${result.snippet}</p></div>` %>
@@ -44,6 +38,7 @@
     <script src="assets/js/bs-init.js"></script>
     <script src='/assets/js/search.js'></script>
     <script defer src='/assets/js/autocomplete.js'></script>
+    <script defer src='/assets/js/knowledge.js'></script>
 </body>
 
 </html>
