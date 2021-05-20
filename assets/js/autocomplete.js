@@ -10,6 +10,18 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		}).catch(() => {
 			document.getElementsByClassName('autocomplete-items')[0].innerHTML = '';
-		})
+		});
+	});
+	document.getElementById('search').addEventListener('blur', () => {
+		if (document.getElementsByClassName('autocomplete-items')[0].innerHTML) {
+			document.getElementsByClassName('autocomplete-items')[0].style.position = 'fixed'
+			document.getElementsByClassName('autocomplete-items')[0].style.visibility = 'hidden'
+		}
+	});
+	document.getElementById('search').addEventListener('focus', () => {
+		if (document.getElementsByClassName('autocomplete-items')[0].innerHTML) {
+			document.getElementsByClassName('autocomplete-items')[0].style.position = 'static'
+			document.getElementsByClassName('autocomplete-items')[0].style.visibility = 'visible'
+		}
 	});
 })
