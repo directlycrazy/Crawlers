@@ -60,19 +60,4 @@ router.get('/images', (req, res) => {
 	}
 });
 
-router.get('/news', async (req, res) => {
-	if (req.query.q) {
-		const articles = await googleNewsScraper({
-			searchTerm: req.query.q,
-			prettyURLs: false,
-			timeframe: "7d",
-			puppeteerArgs: []
-		});
-		if (!articles) return res.sendStatus(500);
-		return res.render('news.ejs', { results: articles, query: req.query.q });
-	} else {
-		return res.redirect('.');
-	}
-});
-
 module.exports = router;
