@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	document.getElementById('nav_images').addEventListener('click', () => {
 		window.location.href = '/search/images?q=' + params.get('q');
 	});
-	document.getElementById('nav_news').addEventListener('click', () => {
-		window.location.href = '/search/news?q=' + params.get('q');
+	document.getElementById('nav_maps').addEventListener('click', () => {
+		window.location.href = 'https://maps.google.com/maps?q=' + params.get('q');
 	});
 })
