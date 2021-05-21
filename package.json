@@ -21,6 +21,7 @@
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "g-i-s": "^2.1.6",
-    "google-it": "^1.6.2"
+    "google-it": "^1.6.2",
+    "google-news-scraper": "^1.0.6"
   }
 }

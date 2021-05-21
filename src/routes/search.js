@@ -2,6 +2,7 @@ const express = require('express');
 const google = require('google-it');
 const axios = require('axios');
 const gis = require('g-i-s');
+const googleNewsScraper = require('google-news-scraper');
 const fs = require('fs');
 
 const router = express.Router();
@@ -54,6 +55,21 @@ router.get('/images', (req, res) => {
 			if (err) return console.log(err);
 			return res.render('images.ejs', { results: data, query: req.query.q });
 		});
+	} else {
+		return res.redirect('.');
+	}
+});
+
+router.get('/news', async (req, res) => {
+	if (req.query.q) {
+		const articles = await googleNewsScraper({
+			searchTerm: req.query.q,
+			prettyURLs: false,
+			timeframe: "7d",
+			puppeteerArgs: []
+		});
+		if (!articles) return res.sendStatus(500);
+		return res.render('news.ejs', { results: articles, query: req.query.q });
 	} else {
 		return res.redirect('.');
 	}

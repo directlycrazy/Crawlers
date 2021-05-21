@@ -31,11 +31,11 @@
             </div>
         </div>
     </div>
-    <ul style='list-style-type: disc;'>
+    <div>
         <% results.forEach(function(result){ %>
-            <%- `<img src='/proxy?q=${result.url}' style='width: 300px; height: 200px; object-fit: cover; border-radius: 15px; padding:10px; cursor: pointer;' onerror="this.remove()" onclick='window.open("/proxy?q=${result.url}")'></img>` %>
+            <%- `<div style="padding-right: 46px;padding-left: 56px; max-width: 48em;"><p style="margin-bottom: 0px;"><a href="${result.link}">${result.title}<br></a></p><p style="opacity: 0.50; margin-bottom:0px;">${result.subtitle}</p><p style="opacity: 0.50;">${result.time} &bull; ${result.source}</p></div>` %>
         <% }); %>
-    </ul>
+    </div>
     <a style='padding-bottom: 16px;padding-left: 16px;' href='https://github.com/directlycrazy/Crawlers'><strong>Crawlers by directlycrazy</strong></a>
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
