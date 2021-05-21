@@ -5,16 +5,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Crawlers / <%= query %></title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="search" href="/opensearch.xml" type="application/opensearchdescription+xml" title="Crawlers">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 
 <body style="color: #fff !important;font-family: Lato, Roboto,Helvetica,Arial,sans-serif;background: #282b30;">
@@ -30,20 +30,16 @@
             </div>
         </div>
     </div>
-    <div style="display: flex;padding-left: 56px;padding-right: 56px;margin-bottom: 15px;" id='instant'>
-        
-    </div>
-    <div>
+    <ul style='list-style-type: disc;'>
         <% results.forEach(function(result){ %>
-            <%- `<div style="padding-right: 46px;padding-left: 56px; max-width: 48em;"><p style="margin-bottom: 0px;opacity: 0.50;font-size: 14px;">${result.link.includes('www.google.com/aclk') ? "<strong>Ad</strong> - " : ""}${result.link.split('/')[2]}</p><p style="margin-bottom: 0px;"><a href="${result.link}">${result.title}<br></a></p><p style="opacity: 0.50;">${result.snippet}</p></div>` %>
+            <%- `<img src='/proxy?q=${result.url}' style='width: 300px; height: 200px; object-fit: cover; border-radius: 15px; padding:10px; cursor: pointer;' onerror="this.remove()" onclick='window.open("/proxy?q=${result.url}")'></img>` %>
         <% }); %>
-    </div>
+    </ul>
     <a style='padding-bottom: 16px;padding-left: 16px;' href='https://github.com/directlycrazy/Crawlers'><strong>Crawlers by directlycrazy</strong></a>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src='/assets/js/search.js'></script>
     <script defer src='/assets/js/autocomplete.js'></script>
-    <script defer src='/assets/js/knowledge.js'></script>
     <script defer src='/assets/js/navigate.js'></script>
 </body>
 
