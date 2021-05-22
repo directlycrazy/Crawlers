@@ -31,15 +31,14 @@
             </div>
         </div>
     </div>
-    <div style="display: flex;padding-left: 56px;padding-right: 56px;margin-bottom: 15px;" id='instant'>
-        
-    </div>
+    <div style="padding-left: 56px;padding-right: 56px;margin-bottom: 15px;" id='instant'></div>
     <div>
         <% results.forEach(function(result){ %>
             <%- `<div style="padding-right: 46px;padding-left: 56px; max-width: 48em;"><p style="margin-bottom: 0px;opacity: 0.50;font-size: 14px;">${result.link.includes('www.google.com/aclk') ? "<strong>Ad</strong> - " : ""}${result.link.split('/')[2]}</p><p style="margin-bottom: 0px;"><a href="${result.link}">${result.title}<br></a></p><p style="opacity: 0.50;">${result.snippet}</p></div>` %>
         <% }); %>
     </div>
     <a style='padding-bottom: 16px;padding-left: 16px;' href='https://github.com/directlycrazy/Crawlers'><strong>Crawlers by directlycrazy</strong></a>
+    <script src='/assets/js/math.js'></script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src='/assets/js/search.js'></script>
