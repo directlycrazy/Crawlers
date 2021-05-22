@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
 		}).then((stream) => {
 			if (stream.headers['content-type'].includes('image') === false) return res.sendStatus(400);
 			if (Number(stream.headers['content-length']) > 26214400) return res.sendStatus(400);
-			res.writeHead(stream.status, stream.headers);
+			res.writeHead(200);
 			return stream.data.pipe(res);
 		}).catch(e => {
 			return res.sendStatus(500);
