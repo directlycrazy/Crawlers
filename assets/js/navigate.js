@@ -8,12 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		$('#nav_all').attr('class', 'btn btn-outline-primary')
 	}
 	document.getElementById('nav_all').addEventListener('click', () => {
-		window.location.href = '/search?q=' + params.get('q');
+		window.location.href = '/search?q=' + encodeURIComponent(params.get('q'));
 	});
 	document.getElementById('nav_images').addEventListener('click', () => {
-		window.location.href = '/search/images?q=' + params.get('q');
+		window.location.href = '/search/images?q=' + encodeURIComponent(params.get('q'));
 	});
 	document.getElementById('nav_maps').addEventListener('click', () => {
-		window.location.href = 'https://maps.google.com/maps?q=' + params.get('q');
+		window.location.href = 'https://maps.google.com/maps?q=' + encodeURIComponent(params.get('q'));
 	});
 })
