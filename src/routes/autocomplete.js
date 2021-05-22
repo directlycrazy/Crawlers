@@ -6,10 +6,16 @@ const router = express.Router();
 router.get('/', (req, res) => {
 	if (req.query.q) {
 		axios.get('https://suggestqueries.google.com/complete/search?output=toolbar&hl=en&q=' + req.query.q).then((a) => {
-			var a = a.data.replace('<?xml version="1.0"?>', '').replace('<toplevel>', '[').replace('</toplevel>', ']').replace(/<CompleteSuggestion><suggestion data=/g, "").replace(/[/]><[/]CompleteSuggestion>/g, ', ').replace(', ]', ']')
-			return res.json([req.query.q, JSON.parse(a)])
+			try {
+				var a = a.data.replace('<?xml version="1.0"?>', '').replace('<toplevel>', '[').replace('</toplevel>', ']').replace(/<CompleteSuggestion><suggestion data=/g, "").replace(/[/]><[/]CompleteSuggestion>/g, ', ').replace(', ]', ']');
+				return res.json([req.query.q, JSON.parse(a)]);
+			} catch (e) {
+				res.sendStatus(500);
+				return console.error(e);
+			}
 		}).catch((e) => {
-			console.log(e)
+			res.sendStatus(500);
+			return console.error(e);
 		});
 	} else {
 		return res.sendStatus(401);
