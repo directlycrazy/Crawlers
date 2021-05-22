@@ -12,10 +12,13 @@ router.get('/', (req, res) => {
 					source: a.data.AbstractSource,
 					url: a.data.AbstractURL,
 					heading: a.data.Heading
-				})
+				});
 			} else {
-				return res.sendStatus(404)
+				return res.sendStatus(404);
 			}
+		}).catch((e) => {
+			res.sendStatus(500);
+			return console.error(e);
 		});
 	} else {
 		return res.redirect('/');

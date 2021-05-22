@@ -33,7 +33,7 @@
     </div>
     <ul style='list-style-type: disc;'>
         <% results.forEach(function(result){ %>
-            <%- `<img src='/proxy?q=${result.url}' style='width: 300px; height: 200px; object-fit: cover; border-radius: 15px; padding:10px; cursor: pointer;' onerror="this.remove()" onclick='window.open("/proxy?q=${result.url}")'></img>` %>
+            <%- `<img src='/proxy?q=${result.url}' loading="lazy" style='width: 300px; height: 200px; object-fit: cover; border-radius: 15px; padding:10px; cursor: pointer;' onerror="this.remove()" onclick='window.open("/proxy?q=${result.url}")'></img>` %>
         <% }); %>
     </ul>
     <a style='padding-bottom: 16px;padding-left: 16px;' href='https://github.com/directlycrazy/Crawlers'><strong>Crawlers by directlycrazy</strong></a>

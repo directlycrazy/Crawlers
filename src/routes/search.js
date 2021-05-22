@@ -15,16 +15,19 @@ router.get('/', (req, res) => {
 					google({ 'query': req.query.q, disableConsole: true }).then(r => {
 						return res.render('search.ejs', { results: r, query: req.query.q });
 					}).catch((e) => {
+						res.sendStatus(500);
 						return console.error(e);
 					});
 				}
 			}).catch((e) => {
+				res.sendStatus(500);
 				return console.error(e);
 			});
 		} else {
 			google({ 'query': req.query.q, disableConsole: true }).then(r => {
 				return res.render('search.ejs', { results: r, query: req.query.q });
 			}).catch((e) => {
+				res.sendStatus(500);
 				return console.error(e);
 			});
 		}
@@ -37,14 +40,18 @@ router.get('/images', (req, res) => {
 	if (req.query.q) {
 		try {
 			gis(req.query.q, (err, data) => {
-				if (err) return console.error(err);
+				if (err) {
+					res.sendStatus(500);
+					return console.error(err);
+				}
 				return res.render('images.ejs', { results: data, query: req.query.q });
-			})
+			});
 		} catch (e) {
-			return console.error(e)
+			res.sendStatus(500);
+			return console.error(e);
 		}
 	} else {
-		return res.redirect('.');
+		return res.redirect('/');
 	}
 });
 
