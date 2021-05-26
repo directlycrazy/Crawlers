@@ -32,11 +32,20 @@
         </div>
     </div>
     <div style="padding-left: 56px;padding-right: 56px;margin-bottom: 15px;" id='instant'></div>
-    <div>
+    <div id='results'></div>
+    <script>
+        var a = []
         <% results.forEach(function(result){ %>
-            <%- `<div style="padding-right: 46px;padding-left: 56px; max-width: 48em;"><p style="margin-bottom: 0px;opacity: 0.50;font-size: 14px;">${result.link.includes('www.google.com/aclk') ? "<strong>Ad</strong> - " : ""}${result.link.split('/')[2]}</p><p style="margin-bottom: 0px;"><a href="${result.link}">${result.title}<br></a></p><p style="opacity: 0.50;">${result.snippet}</p></div>` %>
+        <%- `a.push({name: "${result.title.replace(/"/g, ``).replace(/\n|\t/g, ' ')}", "link" : "${result.link.replace(/"/g, ``).replace(/\n|\t/g, ' ')}", "snippet" : "${result.snippet.replace(/"/g, ``).replace(/\n|\t/g, ' ')}"})` %>
         <% }); %>
-    </div>
+        a.forEach((b, i) => {
+            document.getElementById('results').innerHTML += `<div style="padding-right: 46px;padding-left: 56px; max-width: 48em;"><p style="margin-bottom: 0px;opacity: 0.50;font-size: 14px;" id='${i}_link_header'></p><p style="margin-bottom: 0px;"><a id='${i}_link' href="#"><br></a></p><p style="opacity: 0.50;" id='${i}_snippet'></p></div>`
+            document.getElementById(`${i}_link_header`).textContent = b.link.split('/')[2]
+            document.getElementById(`${i}_link`).textContent = b.name
+            document.getElementById(`${i}_link`).href = b.link
+            document.getElementById(`${i}_snippet`).textContent = b.snippet
+        })
+    </script>
     <a style='padding-bottom: 16px;padding-left: 16px;' href='https://github.com/directlycrazy/Crawlers'><strong>Crawlers by directlycrazy</strong></a>
     <script src='/assets/js/math.js'></script>
     <script src="assets/js/jquery.min.js"></script>
