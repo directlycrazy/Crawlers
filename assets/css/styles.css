@@ -16,3 +16,7 @@ body {
   padding: 5px;
   padding-left: 15px;
 }
+
+code{ 
+  color: rgb(108, 117, 125) !important;
+}
