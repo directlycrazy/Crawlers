@@ -36,7 +36,7 @@
     <script>
         var a = []
         <% results.forEach(function(result){ %>
-        <%- `a.push({name: "${result.title.replace(/"/g, ``).replace(/\n|\t/g, ' ')}", "link" : "${result.link.replace(/"/g, ``).replace(/\n|\t/g, ' ')}", "snippet" : "${result.snippet.replace(/"/g, ``).replace(/\n|\t/g, ' ')}"})` %>
+        <%- `a.push({name: "${result.title ? result.title.replace(/"/g, ``).replace(/\n|\t/g, ' ') : "Unknown"}", "link" : "${result.link ? result.link.replace(/"/g, ``).replace(/\n|\t/g, ' ') : ""}", "snippet" : "${result.snippet ? result.snippet.replace(/"/g, ``).replace(/\n|\t/g, ' ') : "No information provided."}"})` %>
         <% }); %>
         a.forEach((b, i) => {
             document.getElementById('results').innerHTML += `<div style="padding-right: 46px;padding-left: 56px; max-width: 48em;"><p style="margin-bottom: 0px;opacity: 0.50;font-size: 14px;" id='${i}_link_header'></p><p style="margin-bottom: 0px;"><a id='${i}_link' href="#"><br></a></p><p style="opacity: 0.50;" id='${i}_snippet'></p></div>`
