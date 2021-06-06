@@ -3,6 +3,10 @@
   width: 100%;
 }
 
+:root {
+  color-scheme: dark;
+}
+
 body {
 }
 
@@ -19,4 +23,8 @@ body {
 
 code{ 
   color: rgb(108, 117, 125) !important;
+}
+
+.topic{
+  padding: 15px;
 }

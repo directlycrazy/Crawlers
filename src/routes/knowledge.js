@@ -11,18 +11,21 @@ router.get('/', (req, res) => {
 					description: a.data.Abstract,
 					source: a.data.AbstractSource,
 					url: a.data.AbstractURL,
-					heading: a.data.Heading
+					heading: a.data.Heading,
+					related: a.data.RelatedTopics
 				});
 			} else if (a.data.Heading) {
 				return res.json({
 					heading: a.data.Heading,
 					source: a.data.AbstractSource,
-					url: a.data.AbstractURL
+					url: a.data.AbstractURL,
+					related: a.data.RelatedTopics
 				});
 			} else if (a.data.Answer) {
 				return res.json({
 					answer: a.data.Answer,
-					answer_type: a.data.AnswerType
+					answer_type: a.data.AnswerType,
+					related: a.data.RelatedTopics
 				});
 			} else {
 				return res.sendStatus(404);
