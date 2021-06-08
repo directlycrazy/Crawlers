@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			data.related.forEach((a, i) => {
 				if (a.Result) {
 					var string = ('<a' + a.Result.replace(/<a|<[/]a>/g, '|').split('|')[1] + '</a>').replace('https://duckduckgo.com/c/', '/search?q=').replace('https://duckduckgo.com/', '/search?q=').replace(/_/g, '%20')
-					document.getElementById('related_topics').innerHTML += `<div class='col'><div class='card topic' style="background: #282b30; height: 100%;"><h6 class="text-muted card-subtitle" style='margin:auto;overflow: hidden;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;'>${string}</h6></div></div>`;
+					document.getElementById('related_topics').innerHTML += `<div class='col-8 col-md-5'><div class='card topic' style="background: #282b30; height: 100%;"><h6 class="text-muted card-subtitle" style='margin:auto;overflow: hidden;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical; text-align: center;'>${string}</h6></div></div>`;
 				}
 			});
 		}
