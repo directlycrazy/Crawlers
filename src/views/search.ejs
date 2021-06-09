@@ -44,6 +44,9 @@
             }
             document.getElementById('results').innerHTML += `<div style="padding-right: 56px;padding-left: 56px; max-width: 48em;"><p style="margin-bottom: 0px;opacity: 0.50;font-size: 14px;" id='${i}_link_header'></p><p style="margin-bottom: 0px;"><a id='${i}_link' href="#"><br></a></p><p style="opacity: 0.50;" id='${i}_snippet'></p></div>`
             document.getElementById(`${i}_link_header`).textContent = b.link.split('/')[2]
+            if (b.link.includes('google.com/aclk')){
+                document.getElementById(`${i}_link_header`).innerHTML = '<b>Ad</b> - ' + document.getElementById(`${i}_link_header`).innerHTML
+            }
             document.getElementById(`${i}_link`).textContent = b.name
             document.getElementById(`${i}_link`).href = b.link
             document.getElementById(`${i}_snippet`).textContent = b.snippet
