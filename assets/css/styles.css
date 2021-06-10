@@ -7,7 +7,14 @@
   color-scheme: dark;
 }
 
-body {
+@media only screen and (max-width: 600px) {
+  .knowledge_image {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block;
+    float: none !important;
+    margin-bottom: 15px;
+  }
 }
 
 #form{
