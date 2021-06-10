@@ -7,6 +7,9 @@ $('#form').ready(() => {
 			case '/search/images':
 				window.location.href = '/search/images?q=' + encodeURIComponent(document.getElementById('search').value);
 				break;
+			case '/':
+				window.location.href = '/search?q=' + encodeURIComponent(document.getElementById('search').value);
+				break;
 		}
 	};
 	$('#form').submit((e) => {
