@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-	document.getElementsByClassName('form-group')[0].innerHTML += `<div class="autocomplete-items" style='background: #36393e; margin-bottom: 5px; text-align: left;'></div>`;
+	document.getElementsByClassName('form-group')[0].innerHTML += `<div class="autocomplete-items" style='background: #36393e; box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%); margin-bottom: 5px; text-align: left;'></div>`;
 	document.getElementById('search').addEventListener('keyup', () => {
 		fetch('/autocomplete?q=' + document.getElementById('search').value).then(resp => resp.json()).then(data => {
 			if (data[1].length !== 0) {

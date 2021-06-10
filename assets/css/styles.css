@@ -3,7 +3,18 @@
   width: 100%;
 }
 
-body {
+:root {
+  color-scheme: dark;
+}
+
+@media only screen and (max-width: 600px) {
+  .knowledge_image {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block;
+    float: none !important;
+    margin-bottom: 15px;
+  }
 }
 
 #form{
@@ -19,4 +30,8 @@ body {
 
 code{ 
   color: rgb(108, 117, 125) !important;
+}
+
+.topic{
+  padding: 15px;
 }
