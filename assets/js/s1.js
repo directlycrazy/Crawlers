@@ -97,7 +97,33 @@ document.addEventListener('DOMContentLoaded', () => {
 					}
 				});
 			}
-		}).catch((e) => { })
+		}).catch((e) => { });
+	}
+
+	//settings
+
+	if (validate_item('settings_modal')) {
+		const settings = [{
+			name: 'Private Browse Proxy URL',
+			value: 'private_url'
+		}];
+		settings.forEach((a, i) => {
+			var b = localStorage.getItem(a.value);
+			document.getElementById('settings_form').innerHTML += `<div class="form-group"> <label for="exampleInputPassword1">${a.name}</label> <input type="text" class="form-control" id="${a.value}" value='${b ? b : ""}' style='color: #fff;' autocomplete='off' placeholder="Value"></div>`;
+		});
+		document.getElementById('settings_form').innerHTML += `<div class="modal-footer"><input class="btn btn-primary" type="submit"></div>`;
+		document.getElementById('settings').addEventListener('click', () => {
+			$('#settings_modal').modal('show');
+		});
+		document.getElementById('settings_form').addEventListener('submit', (e) => {
+			e.preventDefault();
+			settings.forEach((a, i) => {
+				localStorage.setItem(a.value, document.getElementById(a.value).value);
+				if (i === settings.length - 1) {
+					window.location.reload();
+				}
+			});
+		});
 	}
 });
 

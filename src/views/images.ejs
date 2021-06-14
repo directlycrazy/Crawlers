@@ -31,6 +31,19 @@
             <%- `<img src='/proxy?q=${result.url}' loading="lazy" style='width: 300px; height: 200px; object-fit: cover; border-radius: 15px; padding:10px; cursor: pointer;' onerror="this.remove()" onclick='window.open("/proxy?q=${result.url}")'></img>` %>
         <% }); %>
     </ul>
+    <i class="fa fa-cog" aria-hidden="true" style='position:absolute;right:0;top:0;margin-top:56px;padding:16px;opacity:0.5;cursor:pointer;' id='settings'></i>
+    <div class="modal fade" role="dialog" tabindex="-1" id="settings_modal" aria-modal="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" style='background-color: #36393e;'>
+				<div class="modal-header">
+					<h4 class="modal-title">Settings</h4>
+                </div>
+				<div class="modal-body">
+					<form style="margin-bottom: 0px;" id="settings_form"></form>
+				</div>
+			</div>
+		</div>
+	</div>
     <a style='padding-bottom: 16px;padding-left: 16px;' href='https://github.com/directlycrazy/Crawlers'><strong>Crawlers by directlycrazy</strong></a>
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
