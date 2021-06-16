@@ -42,30 +42,7 @@
 			</div>
 		</div>
 	</div>
-    <script>
-        const private = (a) => {
-            window.location.href = localStorage.getItem('private_url')+a
-        }
-        var a = []
-        <% results.forEach(function(result){ %>
-        <%- `a.push({name: "${result.title ? result.title.replace(/"/g, ``).replace(/\n|\t/g, ' ') : "Unknown"}", "link" : "${result.link ? result.link.replace(/"/g, ``).replace(/\n|\t/g, ' ') : ""}", "snippet" : "${result.snippet ? result.snippet.replace(/"/g, ``).replace(/\n|\t/g, ' ') : "No information provided."}"})` %>
-        <% }); %>
-        a.forEach((b, i) => {
-            var c = localStorage.getItem('private_url') ? true : false
-            if (i === 1) {
-                document.getElementById('results').innerHTML+='<div id="related"></div>'
-            }
-            document.getElementById('results').innerHTML += `<div style="padding-right: 56px;padding-left: 45px;"><div class="result" style="margin-left: 11px; max-width: 600px;"><span>${c ? `<i class="fa fa-user-secret" style='opacity: 0.5; cursor: pointer; display: inline-block;padding-top:5px;padding-left:7px;' onclick="private('${b.link}')" aria-hidden="true"></i>` : ""}  <p style="margin-bottom: 0px;opacity: 0.50;display:inline-block;font-size: 14px; margin-left: 5px;" id='${i}_link_header'></p></span><p style="margin-bottom: 0px; margin-left: 5px;"><a id='${i}_link' href="#"><br></a></p><p style="opacity: 0.50; margin-left: 5px; padding-bottom: 5px;" id='${i}_snippet'></p></div></div>`
-            document.getElementById(`${i}_link_header`).textContent = b.link.split('/')[2]
-            if (b.link.includes('google.com/aclk')){
-                document.getElementById(`${i}_link_header`).innerHTML = '<b>Ad</b> - ' + document.getElementById(`${i}_link_header`).innerHTML
-            }
-            document.getElementById(`${i}_link`).textContent = b.name
-            document.getElementById(`${i}_link`).href = b.link
-            document.getElementById(`${i}_snippet`).textContent = b.snippet
-        })
-    </script>
-    <a style='padding-bottom: 16px;padding-left: 16px;' href='https://github.com/directlycrazy/Crawlers'><strong>Crawlers by directlycrazy</strong></a>
+    <a style='padding-bottom: 16px;padding-left: 16px;' href='https://github.com/directlycrazy/Crawlers' id='credit'><strong>Crawlers by directlycrazy</strong></a>
     <script src='/assets/js/math.js'></script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
