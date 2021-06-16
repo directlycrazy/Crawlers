@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}];
 		settings.forEach((a, i) => {
 			var b = localStorage.getItem(a.value);
-			document.getElementById('settings_form').innerHTML += `<div class="form-group"> <label for="exampleInputPassword1">${a.name}</label> <input type="text" class="form-control" id="${a.value}" value='${b ? b : ""}' style='color: #fff;' autocomplete='off' placeholder="Value"></div>`;
+			document.getElementById('settings_form').innerHTML += `<div class="form-group"><label for="${a.value}">${a.name}</label> <input type="text" class="form-control" id="${a.value}" value='${b ? b : ""}' style='color: #fff;' autocomplete='off' placeholder="Value"></div>`;
 		});
 		document.getElementById('settings_form').innerHTML += `<div class="modal-footer"><input class="btn btn-primary" type="submit"></div>`;
 		document.getElementById('settings').addEventListener('click', () => {
