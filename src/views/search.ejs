@@ -28,16 +28,34 @@
     </div>
     <div style="padding-left: 56px;padding-right: 56px;margin-bottom: 15px;" id='instant'></div>
     <div id='results'></div>
+    <i class="fa fa-cog" aria-hidden="true" style='position:absolute;right:0;top:0;margin-top:56px;padding:16px;opacity:0.5;cursor:pointer;' id='settings'></i>
+    <div class="modal fade" role="dialog" tabindex="-1" id="settings_modal" aria-modal="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" style='background-color: #36393e;'>
+				<div class="modal-header">
+					<h4 class="modal-title">Settings</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+				<div class="modal-body">
+					<form style="margin-bottom: 0px;" id="settings_form"></form>
+				</div>
+			</div>
+		</div>
+	</div>
     <script>
+        const private = (a) => {
+            window.location.href = localStorage.getItem('private_url')+a
+        }
         var a = []
         <% results.forEach(function(result){ %>
         <%- `a.push({name: "${result.title ? result.title.replace(/"/g, ``).replace(/\n|\t/g, ' ') : "Unknown"}", "link" : "${result.link ? result.link.replace(/"/g, ``).replace(/\n|\t/g, ' ') : ""}", "snippet" : "${result.snippet ? result.snippet.replace(/"/g, ``).replace(/\n|\t/g, ' ') : "No information provided."}"})` %>
         <% }); %>
         a.forEach((b, i) => {
+            var c = localStorage.getItem('private_url') ? true : false
             if (i === 1) {
                 document.getElementById('results').innerHTML+='<div id="related"></div>'
             }
-            document.getElementById('results').innerHTML += `<div style="padding-right: 56px;padding-left: 45px;"><div class="result" style="margin-left: 11px; max-width: 600px;"><p style="margin-bottom: 0px;opacity: 0.50;font-size: 14px; margin-left: 5px;" id='${i}_link_header'></p><p style="margin-bottom: 0px; margin-left: 5px;"><a id='${i}_link' href="#"><br></a></p><p style="opacity: 0.50; margin-left: 5px; padding-bottom: 5px;" id='${i}_snippet'></p></div></div>`
+            document.getElementById('results').innerHTML += `<div style="padding-right: 56px;padding-left: 45px;"><div class="result" style="margin-left: 11px; max-width: 600px;"><span>${c ? `<i class="fa fa-user-secret" style='opacity: 0.5; cursor: pointer; display: inline-block;padding-top:5px;padding-left:7px;' onclick="private('${b.link}')" aria-hidden="true"></i>` : ""}  <p style="margin-bottom: 0px;opacity: 0.50;display:inline-block;font-size: 14px; margin-left: 5px;" id='${i}_link_header'></p></span><p style="margin-bottom: 0px; margin-left: 5px;"><a id='${i}_link' href="#"><br></a></p><p style="opacity: 0.50; margin-left: 5px; padding-bottom: 5px;" id='${i}_snippet'></p></div></div>`
             document.getElementById(`${i}_link_header`).textContent = b.link.split('/')[2]
             if (b.link.includes('google.com/aclk')){
                 document.getElementById(`${i}_link_header`).innerHTML = '<b>Ad</b> - ' + document.getElementById(`${i}_link_header`).innerHTML

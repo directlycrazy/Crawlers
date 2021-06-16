@@ -3,6 +3,18 @@
   width: 100%;
 }
 
+.close{
+  color: #fff;
+}
+
+.close:hover{
+  color: #f0f0f0;
+}
+
+.close:active{
+  color: #f0f0f0;
+}
+
 :root {
   color-scheme: dark;
 }
