@@ -5,28 +5,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Crawlers / Home</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
     <link rel="search" href="/opensearch.xml" type="application/opensearchdescription+xml" title="Crawlers">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/dark.css">
     <link rel="stylesheet" href="/assets/fonts/fonts.css">
 </head>
 
-<body style="color: #fff !important;font-family: Lato, Roboto,Helvetica,Arial,sans-serif;background: #282b30;">
-    <nav class="navbar navbar-light navbar-expand-md" style="background: #36393e;box-shadow: 2px 2px 20px rgb(0 0 0 / 10%);min-height: 56px;">
-        <div class="container-fluid"><a class="navbar-brand" href="/" style="color: rgb(255,255,255);">Crawlers</a></div>
+<body class='color-darker' style="font-family: Lato, Roboto,Helvetica,Arial,sans-serif;">
+    <nav class="navbar navbar-light color-dark navbar-expand-md" style="box-shadow: 2px 2px 20px rgb(0 0 0 / 10%);min-height: 56px;">
+        <div class="container-fluid"><a class="navbar-brand" href="/">Crawlers</a></div>
     </nav>
     <div style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);text-align: center;">
-        <h1 data-bss-hover-animate="tada" style="font-family: Lato, sans-serif;margin: 0px;margin-right: 100px;margin-left: 100px;">Crawlers</h1>
-        <p data-bss-hover-animate="pulse" style="font-family: Lato, sans-serif;opacity: 50;">Search with Privacy.</p>
+        <h1 style="font-family: Lato, sans-serif;margin: 0px;margin-right: 100px;margin-left: 100px;">Crawlers</h1>
+        <p style="font-family: Lato, sans-serif;opacity: 50;">Search with Privacy.</p>
         <div class="form-group pulse animated">
-            <form style="display: flex; box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);" id='form'><input class="form-control" type="text" id='search' autocomplete="off" placeholder="Search Query" style="padding: 10px;padding-left: 20px;background: #36393e;color: rgb(238,238,238);"><button class="btn btn-primary" type="button" id='search_btn' style="border-color: rgb(0, 150, 136);border-top-color: rgb(0,;border-right-color: 150,;border-bottom-color: 136);border-left-color: 150,;margin-bottom: 0px;background: #36393e;"><i class="fa fa-search"></i></button></form>
+            <form style="display: flex; box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);" id='form'><input class="form-control color-dark" type="text" id='search' autocomplete="off" placeholder="Search Query" style="padding: 10px;padding-left: 20px;"><button class="btn btn-primary color-dark" type="button" id='search_btn' style="margin-bottom: 0px;"><i class="fa fa-search"></i></button></form>
         </div>
     </div>
     <i class="fa fa-cog" aria-hidden="true" style='position:absolute;right:0;top:0;margin-top:56px;padding:16px;opacity:0.5;cursor:pointer;' id='settings'></i>
     <div class="modal fade" role="dialog" tabindex="-1" id="settings_modal" aria-modal="true">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content" style='background-color: #36393e;'>
+			<div class="modal-content color-dark">
 				<div class="modal-header">
 					<h4 class="modal-title">Settings</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -38,8 +39,8 @@
 		</div>
 	</div>
     <a style='padding-bottom: 16px;padding-left: 16px;position:fixed;bottom:0;left:0;' href='https://github.com/directlycrazy/Crawlers' id='credit'><strong>Crawlers by directlycrazy</strong></a>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script defer src='/assets/js/s1.js'></script>
 </body>
 
