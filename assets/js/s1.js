@@ -8,6 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
 		return false;
 	};
 
+	//themes
+	if (!localStorage.getItem('custom_css')) {
+		localStorage.setItem('custom_css', `:root {
+		--dark: #36393e;
+		--darker: #282b30;
+		--text: #fff;
+		--accent: #009688;
+		color-scheme: dark;
+}`);
+	}
+
 	//loading animation
 	if (validate_item('results') || validate_item('image_results')) {
 		document.getElementById('credit').style.position = 'fixed';
@@ -128,11 +139,24 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (validate_item('settings_modal')) {
 		const settings = [{
 			name: 'Private Browse Proxy URL',
-			value: 'private_url'
+			value: 'private_url',
+			type: 'text'
+		}, {
+			name: 'Custom CSS',
+			value: 'custom_css',
+			type: 'textarea'
 		}];
 		settings.forEach((a, i) => {
 			var b = localStorage.getItem(a.value);
-			document.getElementById('settings_form').innerHTML += `<div class="form-group"><label for="${a.value}">${a.name}</label> <input type="text" class="form-control color-dark" id="${a.value}" value='${b ? b : ""}' style='color: #fff;' autocomplete='off' placeholder="Value"></div>`;
+			document.querySelector('head').innerHTML += `<style>${b}</style>`;
+			switch (a.type) {
+				case 'text':
+					document.getElementById('settings_form').innerHTML += `<div class="form-group"><label for="${a.value}">${a.name}</label> <input type="text" class="form-control color-dark" id="${a.value}" value='${b ? b : ""}' style='color: #fff;' autocomplete='off' placeholder="Value"></div>`;
+					break;
+				case 'textarea':
+					document.getElementById('settings_form').innerHTML += `<div class="form-group"><label for="${a.value}">${a.name}</label> <textarea class="form-control color-dark" id="${a.value}" style='color: #fff;' rows='7' placeholder="Value">${b ? b : ""}</textarea></div>`;
+					break;
+			}
 		});
 		document.getElementById('settings_form').innerHTML += `<div class="modal-footer"><input class="btn btn-primary" type="submit"></div>`;
 		document.getElementById('settings').addEventListener('click', () => {
