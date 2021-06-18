@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
 						//knowledge
 						try {
 							math.parse(document.getElementById('search').value);
-							document.getElementById('instant').innerHTML += `<div class="card" style='max-width: 600px; hyphens: auto; margin-bottom: 16px;'><div class="card-body color-dark" style="max-width: 48em;><h4 class="card-title">Answer</h4><h6 class="text-muted card-subtitle mb-2">${math.evaluate(document.getElementById('search').value)}</h6></div></div>`;
+							document.getElementById('instant').innerHTML += `<div class="card" style='max-width: 600px; hyphens: auto; margin-bottom: 16px;'><div class="card-body color-dark" style="max-width: 48em;"><h4 class="card-title">Answer</h4><h6 class="text-muted card-subtitle mb-2">${math.evaluate(document.getElementById('search').value)}</h6></div></div>`;
 						} catch (e) { }
 						fetch('/knowledge?q=' + document.getElementById('search').value).then(resp => resp.json()).then(data => {
 							if (data.heading) {
