@@ -32,11 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	document.getElementsByClassName('form-group')[0].innerHTML += `<div class="autocomplete-items color-dark" style='box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%); margin-bottom: 5px; text-align: left;'></div>`;
 	document.getElementById('search').addEventListener('keyup', () => {
 		if (!document.getElementById('search').value) { document.getElementsByClassName('autocomplete-items')[0].innerHTML = ''; return; };
-		fetch('/autocomplete?q=' + document.getElementById('search').value).then(resp => resp.json()).then(data => {
+		fetch('/autocomplete?q=' + encodeURIComponent(document.getElementById('search').value)).then(resp => resp.json()).then(data => {
 			if (data[1].length !== 0) {
 				document.getElementsByClassName('autocomplete-items')[0].innerHTML = '';
 				data[1].forEach((a) => {
-					document.getElementsByClassName('autocomplete-items')[0].innerHTML += `<p id='autofill-item' onclick='window.location.href = "/search?q=${a}"'>${a.replace(document.getElementById('search').value, `<strong>${document.getElementById('search').value}</strong>`)}</p>`;
+					document.getElementsByClassName('autocomplete-items')[0].innerHTML += `<p id='autofill-item' onclick='window.location.href = "/search?q=${encodeURIComponent(a)}"'>${a.replace(document.getElementById('search').value, `<strong>${document.getElementById('search').value}</strong>`)}</p>`;
 					return;
 				});
 			}
