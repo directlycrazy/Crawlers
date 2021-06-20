@@ -34,6 +34,10 @@
 	border-color: var(--accent) !important;
 }
 
+#credit{
+  color: var(--accent) !important;
+}
+
 #loading {
   display: inline-block;
   width: 50px;
@@ -52,6 +56,10 @@
   100% {
     transform: rotateZ(360deg);
   }
+}
+
+.btn-primary {
+  color: var(--accent) !important;
 }
 
 button{

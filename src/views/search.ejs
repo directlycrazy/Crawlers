@@ -20,9 +20,9 @@
         <div class="form-group" style="width: 600px;">
             <form style="display: flex;" id='form'><input class="form-control color-dark" type="text" value='<%= query %>' id='search' autocomplete="off" placeholder="Search Query" style="padding: 10px;padding-left: 20px;"><button class="btn btn-primary color-dark" type="button" id='search_btn' style="margin-bottom: 0px;"><i class="fa fa-search"></i></button></form>
             <div class='color-dark' style='width: 100%; box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);'>
-                <a class='btn btn-primary' style='margin-left: 5px;' id='nav_all'>All</a>
-                <a class='btn btn-primary' id='nav_images'>Images</a>
-                <a class='btn btn-primary' id='nav_maps'>Maps</a>
+                <a class='btn' style='margin-left: 5px;' id='nav_all'>All</a>
+                <a class='btn' id='nav_images'>Images</a>
+                <a class='btn' id='nav_maps'>Maps</a>
             </div>
         </div>
     </div>
@@ -30,19 +30,19 @@
     <div id='results'></div>
     <i class="fa fa-cog" aria-hidden="true" style='position:absolute;right:0;top:0;margin-top:56px;padding:16px;opacity:0.5;cursor:pointer;' id='settings'></i>
     <div class="modal fade" role="dialog" tabindex="-1" id="settings_modal" aria-modal="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content color-dark">
-				<div class="modal-header">
-					<h4 class="modal-title">Settings</h4>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content color-dark">
+                <div class="modal-header">
+                    <h4 class="modal-title">Settings</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
-				<div class="modal-body">
-					<form style="margin-bottom: 0px;" id="settings_form"></form>
-				</div>
-			</div>
-		</div>
-	</div>
-    <a style='padding-bottom: 16px;padding-left: 16px;' href='https://github.com/directlycrazy/Crawlers' id='credit'><strong>Crawlers by directlycrazy</strong></a>
+                <div class="modal-body">
+                    <form style="margin-bottom: 0px;" id="settings_form"></form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a style='padding-bottom: 16px;padding-left: 16px;' href='https://github.com/directlycrazy/Crawlers' id='credit'>Crawlers by directlycrazy</a>
     <script src='/assets/js/math.js'></script>
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
