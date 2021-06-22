@@ -12,24 +12,14 @@ router.get('/', (req, res) => {
 				if (a.data.Redirect) {
 					return res.redirect(a.data.Redirect);
 				} else {
-					google({ 'query': req.query.q, disableConsole: true }).then(r => {
-						return res.render('search.ejs', { results: r, query: req.query.q });
-					}).catch((e) => {
-						res.sendStatus(500);
-						return console.error(e);
-					});
+					return res.render('search.ejs', { query: req.query.q });
 				}
 			}).catch((e) => {
 				res.sendStatus(500);
 				return console.error(e);
 			});
 		} else {
-			google({ 'query': req.query.q, disableConsole: true }).then(r => {
-				return res.render('search.ejs', { results: r, query: req.query.q });
-			}).catch((e) => {
-				res.sendStatus(500);
-				return console.error(e);
-			});
+			return res.render('search.ejs', { query: req.query.q });
 		}
 	} else {
 		return res.redirect('/');
@@ -39,13 +29,7 @@ router.get('/', (req, res) => {
 router.get('/images', (req, res) => {
 	if (req.query.q) {
 		try {
-			gis(req.query.q, (err, data) => {
-				if (err) {
-					res.sendStatus(500);
-					return console.error(err);
-				}
-				return res.render('images.ejs', { results: data, query: req.query.q });
-			});
+			return res.render('images.ejs', { query: req.query.q });
 		} catch (e) {
 			res.sendStatus(500);
 			return console.error(e);
