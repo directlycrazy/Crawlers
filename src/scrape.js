@@ -29,6 +29,9 @@ class Scrape {
 
 				const link = (a) => {
 					if (a) {
+						if (a.includes('google.com/aclk')){
+							return a
+						}
 						return querystring.parse(a).url;
 					} else {
 						return false;
