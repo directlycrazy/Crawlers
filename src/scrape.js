@@ -19,32 +19,18 @@ class Scrape {
 
 				const $ = cheerio.load(a.data);
 
-				$('div.ZINbbc > div:nth-child(1) > a > h3').contents().each((i, a) => {
-					if (a.data) {
-						results.push({ title: a.data });
-					} else {
-						results.push({ title: a.children[0].data });
-					}
-				});
+				var link_index = 0;
 
 				const link = (a) => {
 					if (a) {
-						if (a.includes('google.com/aclk')){
-							return a
+						if (a.includes('google.com/aclk')) {
+							return a;
 						}
 						return querystring.parse(a).url;
 					} else {
 						return false;
 					}
 				};
-
-				$('div.ZINbbc > div:nth-child(1) > a').map((i, a) => {
-					if (i < results.length) {
-						results[i] = Object.assign(results[i], {
-							link: link(a.attribs.href)
-						});
-					}
-				});
 
 				const snippet = (a) => {
 					const data = (child) => {
@@ -56,12 +42,16 @@ class Scrape {
 					return a.children && a.children.length > 0 ? a.children.map((child) => Array(data(child)).join('')).join('') : '';
 				};
 
-				$('#main > div > div > div > div:not(.v9i61e) > div.AP7Wnd').map((i, a) => {
-					if (i < results.length) {
-						results[i] = Object.assign(results[i], {
-							snippet: snippet(a)
-						});
+				$('div.ZINbbc > div:nth-child(1) > a > h3').contents().each((i, a) => {
+					var result_title = a.data ? a.data : a.children[0].data;
+					var result_link = $('div.ZINbbc > div:nth-child(1) > a')[link_index].attribs.href;
+					var result_snippet = $('#main > div > div > div > div:not(.v9i61e) > div.AP7Wnd')[i];
+					if (!result_link.startsWith('/url?esrc=')) {
+						link_index++;
+						result_link = $('div.ZINbbc > div:nth-child(1) > a')[link_index].attribs.href;
 					}
+					results.push({ title: result_title, link: link(result_link), snippet: snippet(result_snippet) });
+					link_index++;
 				});
 
 				return res(results);
