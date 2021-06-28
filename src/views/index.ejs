@@ -38,6 +38,12 @@
         </div>
     </div>
     <a style='padding-bottom: 16px;padding-left: 16px;position:fixed;bottom:0;left:0;' href='https://github.com/directlycrazy/Crawlers' target='_blank' id='credit'>Crawlers by directlycrazy</a>
+    <!-- custom themes -->
+    <script>
+        if (localStorage.getItem('custom_css')) {
+            document.querySelector('head').innerHTML += `<style>${localStorage.getItem('custom_css')}</style>`;
+        }
+    </script>
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script defer src='/assets/js/s1.js'></script>
