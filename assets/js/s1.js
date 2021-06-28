@@ -155,8 +155,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		settings.forEach((a, i) => {
 			var b = localStorage.getItem(a.value);
 			if (a.value === 'custom_css') {
-				if (document.getElementById(a.value).innerHTML === '') {
-					document.querySelector('#' + a.value).innerHTML += b;
+				if (document.getElementById('custom_css_element').innerHTML === '') {
+					document.querySelector('#custom_css_element').innerHTML += b;
 				}
 			}
 			switch (a.type) {
