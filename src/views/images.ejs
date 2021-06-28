@@ -10,6 +10,7 @@
     <link rel="search" href="/opensearch.xml" type="application/opensearchdescription+xml" title="Crawlers">
     <link rel="stylesheet" href="/assets/css/styles.css">
     <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <style id='custom_css'></style>
 </head>
 
 <body class='color-darker' style="font-family: Lato, Roboto,Helvetica,Arial,sans-serif;">
@@ -45,7 +46,7 @@
     <!-- custom themes -->
     <script>
         if (localStorage.getItem('custom_css')) {
-            document.querySelector('head').innerHTML += `<style>${localStorage.getItem('custom_css')}</style>`;
+            document.querySelector('#custom_css').innerHTML += localStorage.getItem('custom_css')
         }
     </script>
     <script src="/assets/js/jquery.min.js"></script>

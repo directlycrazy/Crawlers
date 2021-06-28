@@ -148,7 +148,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		}];
 		settings.forEach((a, i) => {
 			var b = localStorage.getItem(a.value);
-			document.querySelector('head').innerHTML += `<style>${b}</style>`;
+			if (a.value === 'custom_css') {
+				if (document.getElementById(a.value).innerHTML === '') {
+					document.querySelector('#' + a.value).innerHTML += b;
+				}
+			}
 			switch (a.type) {
 				case 'text':
 					document.getElementById('settings_form').innerHTML += `<div class="form-group"><label for="${a.value}">${a.name}</label> <input type="text" class="form-control color-dark" id="${a.value}" value='${b ? b : ""}' style='color: #fff;' autocomplete='off' placeholder="Value"></div>`;
