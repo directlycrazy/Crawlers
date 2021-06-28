@@ -172,6 +172,13 @@ document.addEventListener('DOMContentLoaded', () => {
 			});
 		});
 	}
+
+	//fetch latest commit sha
+	fetch('/version').then(resp => resp.json()).then((a) => {
+		if (a) {
+			document.getElementById('credit').innerHTML = `Crawlers by directlycrazy (${a.version})`;
+		}
+	}).catch((e) => { });
 });
 
 //search
