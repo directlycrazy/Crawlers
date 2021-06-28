@@ -80,7 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			$('#nav_images').attr('class', 'btn btn-outline-primary');
 		} else {
 			//search results
+			var initiated_time = new Date().getTime()
 			fetch('/results/search?q=' + params.get('q')).then(resp => resp.json()).then((a) => {
+				var loaded_time = new Date().getTime()
 				document.getElementById('credit').style.position = '';
 				document.getElementsByClassName('loader')[0].remove();
 				//spell check
@@ -126,6 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
 					document.getElementById(`${i}_link`).href = b.link;
 					document.getElementById(`${i}_snippet`).textContent = b.snippet;
 				});
+				//results count and time
+				document.getElementById('results').innerHTML += `<div style="padding-right: 56px;padding-left: 56px;"><p style='opacity: 0.5; padding-left: 5px;'>${a.results.length} results in ${Math.abs(initiated_time - loaded_time)}ms</p></div>`;
 			});
 			$('#nav_all').attr('class', 'btn btn-outline-primary');
 		}
