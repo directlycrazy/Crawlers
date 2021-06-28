@@ -32,6 +32,8 @@ class Scrape {
 					}
 				};
 
+				var correct_string = $('#scl').html();
+
 				const snippet = (a) => {
 					const data = (child) => {
 						if (!child.data) {
@@ -54,7 +56,11 @@ class Scrape {
 					link_index++;
 				});
 
-				return res(results);
+				if (correct_string) {
+					return res({ correct_string: correct_string, results: results });
+				} else {
+					return res({ results: results });
+				}
 			});
 		});
 	}

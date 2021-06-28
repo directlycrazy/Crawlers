@@ -83,17 +83,23 @@ document.addEventListener('DOMContentLoaded', () => {
 			fetch('/results/search?q=' + params.get('q')).then(resp => resp.json()).then((a) => {
 				document.getElementById('credit').style.position = '';
 				document.getElementsByClassName('loader')[0].remove();
-				a.forEach((b, i) => {
+				//spell check
+				var correct_string = '';
+				if (a.correct_string) {
+					document.getElementById('results').innerHTML += `<div style="padding-right: 56px;padding-left: 56px;"><p style='opacity: 0.5; padding-left: 5px;'>Did you mean <a href='/search?q=${encodeURIComponent(a.correct_string.replace(/(<([^>]+)>)/ig, ""))}' class='accent'>${a.correct_string.replace('<i>', '').replace('</i>', '')}</a>?</p></div>`;
+					correct_string = encodeURIComponent(a.correct_string.replace(/(<([^>]+)>)/ig, ""));
+				}
+				a.results.forEach((b, i) => {
 					var c = localStorage.getItem('private_url') ? true : false;
 					if (i === 1) {
 						document.getElementById('results').innerHTML += '<div id="related"></div>';
-					} else if (i === a.length - 1) {
+					} else if (i === a.results.length - 1) {
 						//knowledge
 						try {
 							math.parse(document.getElementById('search').value);
 							document.getElementById('instant').innerHTML += `<div class="card" style='max-width: 600px; hyphens: auto; margin-bottom: 16px;'><div class="card-body color-dark" style="max-width: 48em;"><h4 class="card-title">Answer</h4><h6 class="text-muted card-subtitle mb-2">${math.evaluate(document.getElementById('search').value)}</h6></div></div>`;
 						} catch (e) { }
-						fetch('/knowledge?q=' + document.getElementById('search').value).then(resp => resp.json()).then(data => {
+						fetch('/knowledge?q=' + (correct_string ? correct_string : document.getElementById('search').value)).then(resp => resp.json()).then(data => {
 							if (data.heading) {
 								document.getElementById('instant').innerHTML += `<div class="card" style='max-width: 600px; hyphens: auto; margin-bottom: 16px;'><div class="card-body color-dark" style="max-width: 48em;">${data.image ? `<img class="knowledge_image" src="/proxy?q=https://duckduckgo.com${data.image}" style="float: right; max-height: 120px; max-width: 120px; margin: 15px;">` : ""}<h4 class="card-title" style="word-wrap: normal !important;">${data.heading}</h4><p class="card-subtitle mb-2" style='font-size: 16px; overflow: hidden;color:#fff;opacity:0.5;display: -webkit-box;-webkit-line-clamp: 10;-webkit-box-orient: vertical;'>${data.description ? data.description.replace(/[\n]/g, '<br />') : ""}</p><h6 class="text-muted card-subtitle mb-2"><a class='accent' href='${data.url}'>${data.source}</a></h6></div></div>`;
 							} else if (data.answer) {
