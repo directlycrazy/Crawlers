@@ -1,7 +1,5 @@
 const express = require('express');
-const google = require('google-it');
 const axios = require('axios');
-const gis = require('g-i-s');
 
 const router = express.Router();
 
