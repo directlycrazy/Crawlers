@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
 	if (req.query.q) {
+		if (!req.query.q.startsWith('https://encrypted-tbn0.gstatic.com/images?q=tbn:')) return res.sendStatus(400)
 		axios.get(req.query.q, {
 			responseType: 'stream'
 		}).then((stream) => {
