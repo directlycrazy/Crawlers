@@ -32,6 +32,8 @@ class Scrape {
 					}
 				};
 
+				var correct_string = $('#scl').html();
+
 				const snippet = (a) => {
 					const data = (child) => {
 						if (!child.data) {
@@ -46,15 +48,31 @@ class Scrape {
 					var result_title = a.data ? a.data : a.children[0].data;
 					var result_link = $('div.ZINbbc > div:nth-child(1) > a')[link_index].attribs.href;
 					var result_snippet = $('#main > div > div > div > div:not(.v9i61e) > div.AP7Wnd')[i];
+
 					if (!(result_link.startsWith('/url?esrc=') || result_link.startsWith('http://www.google.com/url?esrc=') || result_link.startsWith('https://www.google.com/url?esrc='))) {
 						link_index++;
-						result_link = $('div.ZINbbc > div:nth-child(1) > a')[link_index].attribs.href;
+						var c = $('div.ZINbbc > div:nth-child(1) > a')[link_index].attribs;
+						if (c) {
+							return result_link = c.href;
+						} else {
+							return result_link = null;
+						}
 					}
-					results.push({ title: result_title, link: link(result_link), snippet: snippet(result_snippet) });
+
+					var b = { title: result_title, link: link(result_link), snippet: snippet(result_snippet) };
+
+					if (b.title && b.link && b.snippet) {
+						results.push(b);
+					}
+
 					link_index++;
 				});
 
-				return res(results);
+				if (correct_string) {
+					return res({ correct_string: correct_string, results: results });
+				} else {
+					return res({ results: results });
+				}
 			});
 		});
 	}
