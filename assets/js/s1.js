@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			window.location.href = '/search/images?q=' + encodeURIComponent(params.get('q'));
 		});
 		document.getElementById('nav_maps').addEventListener('click', () => {
-			window.location.href = 'https://maps.google.com/maps?q=' + encodeURIComponent(params.get('q'));
+			window.location.href = 'https://www.openstreetmap.org/search?xhr=1&query=' + encodeURIComponent(params.get('q'));
 		});
 	}
 
