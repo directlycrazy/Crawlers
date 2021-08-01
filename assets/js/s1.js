@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				document.getElementById('credit').style.position = '';
 				document.getElementsByClassName('loader')[0].remove();
 				a.forEach((result, i) => {
-					document.getElementById('image_results').innerHTML += `<img src='/proxy?q=${result.url}' loading="lazy" style='width: 300px; height: 200px; object-fit: cover; border-radius: 15px; padding:10px; cursor: pointer;' onerror="this.remove()" onclick='window.open("/proxy?q=${result.url}")'></img>`;
+					document.getElementById('image_results').innerHTML += `<img src='/proxy?q=${result.url}' loading="lazy" style='width: 300px; height: 200px; object-fit: cover; border-radius: 15px; padding:10px; cursor: pointer;' onerror="this.remove()" onclick='image_load("${result.url}")'></img>`;
 				});
 			});
 			$('#nav_images').attr('class', 'btn btn-outline-primary');
@@ -198,6 +198,33 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}).catch((e) => { });
 });
+
+//image handling
+
+const image_load = (url) => {
+	var image = new Image();
+	image.src = '/proxy?q=' + url;
+	var viewer = new Viewer(image, {
+		loop: false,
+		keyboard: false,
+		movable: false,
+		navbar: false,
+		rotatable: false,
+		scalable: false,
+		slideOnTouch: false,
+		title: false,
+		toggleOnDblclick: false,
+		toolbar: false,
+		tooltip: false,
+		zoomable: false,
+		zoomOnTouch: false,
+		zoomOnWheel: false,
+		hidden: function () {
+			viewer.destroy();
+		},
+	});
+	viewer.show();
+};
 
 //search
 

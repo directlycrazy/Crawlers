@@ -78,23 +78,42 @@ class Scrape {
 	}
 	images() {
 		return new Promise(res => {
-			axios.get('https://www.google.com/search?tbm=isch&q=' + this.query, {
+			axios.get('https://images.google.com/search?tbm=isch&q=' + this.query, {
 				headers: {
-					'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:34.0) Gecko/20100101 Firefox/34.0"
+					'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
 				}
 			}).then(a => {
 				var $ = cheerio.load(a.data);
 
-				var results = [];
+				var scripts = $('script');
 
-				$('.t0fcAb').contents().prevObject.each((i, a) => {
-					if (a.attribs.src) {
-						results.push({ url: a.attribs.src });
+				var contents = [];
+
+				for (var i = 0; i < scripts.length; ++i) {
+					if (scripts[i].children.length > 0) {
+						const content = scripts[i].children[0].data;
+						contents.push(content);
 					}
-					return;
-				});
+				}
 
-				return res(results);
+				const results = (content) => {
+					var refs = [];
+					var re = /\["(http.+?)",(\d+),(\d+)\]/g;
+					var result;
+					while ((result = re.exec(content)) !== null) {
+						if (result.length > 3) {
+							var ref = {
+								url: result[1]
+							};
+							if (!ref.url.includes('gstatic')) {
+								refs.push(ref);
+							}
+						}
+					}
+					return refs;
+				};
+
+				return res(flatten(contents.map(results)));
 			});
 		});
 	}
