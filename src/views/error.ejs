@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Crawlers / Error</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
+    <link rel="search" href="/opensearch.xml" type="application/opensearchdescription+xml" title="Crawlers">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <style id='custom_css_element'></style>
+</head>
+
+<body class='color-darker' style="font-family: Lato, Roboto,Helvetica,Arial,sans-serif;">
+    <nav class="navbar navbar-light color-dark navbar-expand-md" style="box-shadow: 2px 2px 20px rgb(0 0 0 / 10%);min-height: 56px;">
+        <div class="container-fluid"><a class="navbar-brand" href="/">Crawlers</a></div>
+    </nav>
+    <div style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);text-align: center;">
+        <h1 style="font-family: Lato, sans-serif;margin: 0px;margin-right: 100px;margin-left: 100px;">Error</h1>
+				<p style="font-family: Lato, sans-serif;opacity: 0.5;margin-bottom:0px;max-width:358.05px;">You are being rate limited or your internet is offline. Please check your connection and try again.</p>
+        <a style="font-family: Lato, sans-serif;" class='accent' href='#' onclick='window.history.back()'>Refresh</a>
+    </div>
+    <a style='padding-bottom: 16px;padding-left: 16px;position:fixed;bottom:0;left:0;' href='https://github.com/directlycrazy/Crawlers' target='_blank' id='credit'>Crawlers by directlycrazy</a>
+    <!-- custom themes -->
+    <script>
+        if (localStorage.getItem('custom_css')) {
+            document.querySelector('#custom_css_element').innerHTML += localStorage.getItem('custom_css')
+        }
+    </script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

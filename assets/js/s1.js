@@ -80,6 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
 				a.forEach((result, i) => {
 					document.getElementById('image_results').innerHTML += `<img src='/proxy?q=${result.url}' loading="lazy" style='width: 300px; height: 200px; object-fit: cover; border-radius: 15px; padding:10px; cursor: pointer;' onerror="this.remove()" onclick='image_load("${result.url}")'></img>`;
 				});
+			}).catch((e) => {
+				window.location.href = '/error';
 			});
 			$('#nav_images').attr('class', 'btn btn-outline-primary');
 		} else {
@@ -134,6 +136,8 @@ document.addEventListener('DOMContentLoaded', () => {
 					document.getElementById(`${i}_link`).href = b.link;
 					document.getElementById(`${i}_snippet`).textContent = b.snippet;
 				});
+			}).catch((e) => {
+				window.location.href = '/error';
 			});
 			$('#nav_all').attr('class', 'btn btn-outline-primary');
 		}
