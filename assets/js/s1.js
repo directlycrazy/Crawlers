@@ -69,13 +69,19 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (window.location.pathname.includes('news')) {
 			$('#nav_news').attr('class', 'btn btn-outline-primary');
 		} else if (window.location.pathname.includes('images')) {
+			var initiated_time = new Date().getTime();
 			//image search results
 			fetch('/results/images?q=' + params.get('q')).then(resp => resp.json()).then((a) => {
+				var loaded_time = new Date().getTime();
+				//results count and time
+				document.getElementById('results').innerHTML += `<p style='opacity: 0.5;'>Response took ${(Math.abs(initiated_time - loaded_time) / 1000).toFixed(2)} seconds for ${a.length} results.</p></div>`;
 				document.getElementById('credit').style.position = '';
 				document.getElementsByClassName('loader')[0].remove();
 				a.forEach((result, i) => {
-					document.getElementById('image_results').innerHTML += `<img src='/proxy?q=${result.url}' loading="lazy" style='width: 300px; height: 200px; object-fit: cover; border-radius: 15px; padding:10px; cursor: pointer;' onerror="this.remove()" onclick='window.open("/proxy?q=${result.url}")'></img>`;
+					document.getElementById('image_results').innerHTML += `<img src='/proxy?q=${result.url}' loading="lazy" style='width: 300px; height: 200px; object-fit: cover; border-radius: 15px; padding:10px; cursor: pointer;' onerror="this.remove()" onclick='image_load("${result.url}")'></img>`;
 				});
+			}).catch((e) => {
+				window.location.href = '/error';
 			});
 			$('#nav_images').attr('class', 'btn btn-outline-primary');
 		} else {
@@ -84,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			fetch('/results/search?q=' + params.get('q')).then(resp => resp.json()).then((a) => {
 				var loaded_time = new Date().getTime();
 				//results count and time
-				document.getElementById('instant').innerHTML += `<p style='opacity: 0.5; padding-left: 5px;'>Response took ${(Math.abs(initiated_time - loaded_time)/1000).toFixed(2)} seconds for ${a.results.length} results.</p></div>`;
+				document.getElementById('instant').innerHTML += `<p style='opacity: 0.5; padding-left: 5px;'>Response took ${(Math.abs(initiated_time - loaded_time) / 1000).toFixed(2)} seconds for ${a.results.length} results.</p></div>`;
 				document.getElementById('credit').style.position = '';
 				document.getElementsByClassName('loader')[0].remove();
 				//spell check
@@ -130,6 +136,8 @@ document.addEventListener('DOMContentLoaded', () => {
 					document.getElementById(`${i}_link`).href = b.link;
 					document.getElementById(`${i}_snippet`).textContent = b.snippet;
 				});
+			}).catch((e) => {
+				window.location.href = '/error';
 			});
 			$('#nav_all').attr('class', 'btn btn-outline-primary');
 		}
@@ -140,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			window.location.href = '/search/images?q=' + encodeURIComponent(params.get('q'));
 		});
 		document.getElementById('nav_maps').addEventListener('click', () => {
-			window.location.href = 'https://maps.google.com/maps?q=' + encodeURIComponent(params.get('q'));
+			window.location.href = 'https://www.openstreetmap.org/search?xhr=1&query=' + encodeURIComponent(params.get('q'));
 		});
 	}
 
@@ -194,6 +202,33 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}).catch((e) => { });
 });
+
+//image handling
+
+const image_load = (url) => {
+	var image = new Image();
+	image.src = '/proxy?q=' + url;
+	var viewer = new Viewer(image, {
+		loop: false,
+		keyboard: false,
+		movable: false,
+		navbar: false,
+		rotatable: false,
+		scalable: false,
+		slideOnTouch: false,
+		title: false,
+		toggleOnDblclick: false,
+		toolbar: false,
+		tooltip: false,
+		zoomable: false,
+		zoomOnTouch: false,
+		zoomOnWheel: false,
+		hidden: function () {
+			viewer.destroy();
+		},
+	});
+	viewer.show();
+};
 
 //search
 
