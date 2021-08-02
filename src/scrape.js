@@ -76,6 +76,29 @@ class Scrape {
 			});
 		});
 	}
+	duckducksearch(result_num) {
+		return new Promise(res => {
+			axios.get(`https://lite.duckduckgo.com/lite/?dc=${result_num}&q=${this.query}`, {
+				headers: {
+					'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
+				}
+			}).then(a => {
+				var $ = cheerio.load(a.data);
+
+				var results = [];
+
+				$('a.result-link').each((i, a) => {
+					var b = { title: a.data ? a.data : a.children[0].data, link: a.attribs.href, snippet: String($('td.result-snippet').eq(i).html()).trim().replace('\n', '') };
+
+					results.push(b);
+
+					return;
+				});
+
+				return res(results);
+			});
+		});
+	}
 	images() {
 		return new Promise(res => {
 			axios.get('https://images.google.com/search?tbm=isch&q=' + this.query, {

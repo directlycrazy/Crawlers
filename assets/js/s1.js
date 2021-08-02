@@ -88,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			//search results
 			var initiated_time = new Date().getTime();
 			fetch('/results/search?q=' + params.get('q')).then(resp => resp.json()).then((a) => {
+				document.getElementById('load_more_results').style.visibility = 'visible';
 				var loaded_time = new Date().getTime();
 				//results count and time
 				document.getElementById('instant').innerHTML += `<p style='opacity: 0.5; padding-left: 5px;'>Response took ${(Math.abs(initiated_time - loaded_time) / 1000).toFixed(2)} seconds for ${a.results.length} results.</p></div>`;
@@ -136,9 +137,23 @@ document.addEventListener('DOMContentLoaded', () => {
 					document.getElementById(`${i}_link`).href = b.link;
 					document.getElementById(`${i}_snippet`).textContent = b.snippet;
 				});
-			}).catch((e) => {
-				window.location.href = '/error';
-			});
+
+				//load extra results
+				document.getElementById('load_more_results').addEventListener('click', () => {
+					fetch('/results/search/pages?q=' + params.get('q') + '&r=' + document.getElementById('results').childElementCount).then(resp => resp.json()).then((a) => {
+						var c = localStorage.getItem('private_url') ? true : false;
+						a.forEach((b, i) => {
+							var index = 1 + document.getElementById('results').childElementCount;
+							document.getElementById('results').innerHTML += `<div style="padding-right: 56px;padding-left: 45px;"><div class="result" style="margin-left: 11px; max-width: 600px;"><span>${c ? `<i class="fa fa-user-secret" style='opacity: 0.5; cursor: pointer; display: inline-block;padding-top:5px;padding-left:7px;' onclick="window.location.href = localStorage.getItem('private_url') + '${b.link}'" aria-hidden="true"></i>` : ""}  <p style="margin-bottom: 0px;opacity: 0.50;display:inline-block;font-size: 14px; margin-left: 5px;" id='${index}_link_header'></p></span><p style="margin-bottom: 0px; margin-left: 5px;"><a class='accent' id='${index}_link' href="#"><br></a></p><p style="opacity: 0.50; margin-left: 5px; padding-bottom: 5px;" id='${index}_snippet'></p></div></div>`;
+							document.getElementById(`${index}_link_header`).textContent = b.link.split('/')[2];
+							document.getElementById(`${index}_link`).textContent = b.title;
+							document.getElementById(`${index}_link`).href = b.link;
+							document.getElementById(`${index}_snippet`).textContent = b.snippet.replace(/(<([^>]+)>)/ig, "");
+						});
+					});
+					return;
+				});
+			}).catch((e) => { });
 			$('#nav_all').attr('class', 'btn btn-outline-primary');
 		}
 		document.getElementById('nav_all').addEventListener('click', () => {

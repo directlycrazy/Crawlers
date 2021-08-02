@@ -24,6 +24,18 @@ router.get('/search', (req, res) => {
   }
 });
 
+router.get('/search/pages', (req, res) => {
+  const a = new scrape(req.query.q);
+  if (req.query.q && req.query.r) {
+    if (isNaN(req.query.r)) return res.redirect('/');
+    a.duckducksearch(req.query.r).then(b => {
+      return res.json(b);
+    });
+  } else {
+    return res.redirect('/');
+  }
+});
+
 router.get('/images', (req, res) => {
   const a = new scrape(req.query.q);
   if (req.query.q) {
