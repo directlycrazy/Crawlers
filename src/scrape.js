@@ -140,6 +140,17 @@ class Scrape {
 			});
 		});
 	}
+	weather() {
+		return new Promise(res => {
+			const weather = require('weather-js');
+			weather.find({ search: this.query, degreeType: 'C' }, (err, data) => {
+				if (err) return;
+				if (data) {
+					return res({ current: data[0].current.temperature, location: data[0].current.observationpoint });
+				}
+			});
+		});
+	}
 }
 
 module.exports = Scrape;

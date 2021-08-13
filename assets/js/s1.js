@@ -94,6 +94,36 @@ document.addEventListener('DOMContentLoaded', () => {
 				document.getElementById('instant').innerHTML += `<p style='opacity: 0.5; padding-left: 5px;'>Response took ${(Math.abs(initiated_time - loaded_time) / 1000).toFixed(2)} seconds for ${a.results.length} results.</p></div>`;
 				document.getElementById('credit').style.position = '';
 				document.getElementsByClassName('loader')[0].remove();
+				//weather
+				if (document.getElementById('search').value.includes('weather')) {
+					if (document.getElementById('search').value.split(' ').length === 2) {
+						var temp = '';
+						if (document.getElementById('search').value.split(' ')[0] === 'weather') {
+							fetch('/results/weather?q=' + document.getElementById('search').value.split(' ')[1]).then(resp => resp.json()).then(data => {
+								temp = data.current;
+								document.getElementById('instant').innerHTML += `<div class="card" style='max-width: 600px; hyphens: auto; margin-bottom: 16px;'><div class="card-body color-dark" style="max-width: 48em;"><h4 class="card-title" id='weather_current'>${data.current}°</h4><span class="text-muted card-subtitle mb-2" style="float: right;"><a id='c_temp' class='accent' href='#'>C</a> | <a id='f_temp' class='accent' href='#'>F</a></span><h6 class="text-muted card-subtitle mb-2">In ${data.location}</h6></div></div>`;
+								document.getElementById('c_temp').addEventListener('click', () => {
+									document.getElementById('weather_current').innerHTML = temp + '°';
+								});
+								document.getElementById('f_temp').addEventListener('click', () => {
+									document.getElementById('weather_current').innerHTML = Math.floor(temp * 1.8000 + 32.00) + '°';
+								});
+							});
+						} else {
+							fetch('/results/weather?q=' + document.getElementById('search').value.split(' ')[0]).then(resp => resp.json()).then(data => {
+								temp = data.current;
+								document.getElementById('instant').innerHTML += `<div class="card" style='max-width: 600px; hyphens: auto; margin-bottom: 16px;'><div class="card-body color-dark" style="max-width: 48em;"><h4 class="card-title" id='weather_current'>${data.current}°</h4><span class="text-muted card-subtitle mb-2" style="float: right;"><a id='c_temp' class='accent' href='#'>C</a> | <a id='f_temp' class='accent' href='#'>F</a></span><h6 class="text-muted card-subtitle mb-2">In ${data.location}</h6></div></div>`;
+								document.getElementById('c_temp').addEventListener('click', () => {
+									document.getElementById('weather_current').innerHTML = temp + '°';
+								});
+								document.getElementById('f_temp').addEventListener('click', () => {
+									document.getElementById('weather_current').innerHTML = Math.floor(temp * 1.8000 + 32.00) + '°';
+								});
+							});
+						}
+
+					}
+				}
 				//spell check
 				var correct_string = '';
 				if (a.correct_string) {
@@ -110,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
 							math.parse(document.getElementById('search').value);
 							document.getElementById('instant').innerHTML += `<div class="card" style='max-width: 600px; hyphens: auto; margin-bottom: 16px;'><div class="card-body color-dark" style="max-width: 48em;"><h4 class="card-title">Answer</h4><h6 class="text-muted card-subtitle mb-2">${math.evaluate(document.getElementById('search').value)}</h6></div></div>`;
 						} catch (e) { }
-						fetch('/knowledge?q=' + (correct_string ? correct_string : document.getElementById('search').value)).then(resp => resp.json()).then(data => {
+						fetch('/results/knowledge?q=' + (correct_string ? correct_string : document.getElementById('search').value)).then(resp => resp.json()).then(data => {
 							if (data.heading) {
 								document.getElementById('instant').innerHTML += `<div class="card" style='max-width: 600px; hyphens: auto; margin-bottom: 16px;'><div class="card-body color-dark" style="max-width: 48em;">${data.image ? `<img class="knowledge_image" src="/proxy?q=https://duckduckgo.com${data.image}" style="float: right; max-height: 120px; max-width: 120px; margin: 15px;">` : ""}<h4 class="card-title" style="word-wrap: normal !important;">${data.heading}</h4><p class="card-subtitle mb-2" style='font-size: 16px; overflow: hidden;color:#fff;opacity:0.5;display: -webkit-box;-webkit-line-clamp: 10;-webkit-box-orient: vertical;'>${data.description ? data.description.replace(/[\n]/g, '<br />') : ""}</p><h6 class="text-muted card-subtitle mb-2"><a class='accent' href='${data.url}'>${data.source}</a></h6></div></div>`;
 							} else if (data.answer) {
