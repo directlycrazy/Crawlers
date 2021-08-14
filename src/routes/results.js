@@ -18,6 +18,8 @@ router.get('/search', (req, res) => {
   if (req.query.q) {
     a.all().then(b => {
       return res.json(b);
+    }, () => {
+      return res.sendStatus(500);
     });
   } else {
     return res.redirect('/');
@@ -30,6 +32,8 @@ router.get('/search/pages', (req, res) => {
     if (isNaN(req.query.r)) return res.redirect('/');
     a.duckducksearch(req.query.r).then(b => {
       return res.json(b);
+    }, () => {
+      return res.sendStatus(500);
     });
   } else {
     return res.redirect('/');
@@ -41,6 +45,8 @@ router.get('/images', (req, res) => {
   if (req.query.q) {
     a.images().then(b => {
       return res.json(b);
+    }, () => {
+      return res.sendStatus(500);
     });
   } else {
     return res.redirect('/');
@@ -52,6 +58,8 @@ router.get('/weather', (req, res) => {
   if (req.query.q) {
     a.weather().then(b => {
       return res.json(b);
+    }, () => {
+      return res.sendStatus(500);
     });
   } else {
     return res.redirect('/');
