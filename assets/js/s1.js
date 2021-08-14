@@ -174,6 +174,14 @@ document.addEventListener('DOMContentLoaded', () => {
 						var c = localStorage.getItem('private_url') ? true : false;
 						a.forEach((b, i) => {
 							var index = 1 + document.getElementById('results').childElementCount;
+							for (var i = 0; i < index; i++) {
+								var a = document.getElementById(i + '_link');
+								if (a) {
+									if (a.attributes.href === b.link || a.innerHTML === b.title) {
+										return;
+									};
+								}
+							}
 							document.getElementById('results').innerHTML += `<div style="padding-right: 56px;padding-left: 45px;"><div class="result" style="margin-left: 11px; max-width: 600px;"><span>${c ? `<i class="fa fa-user-secret" style='opacity: 0.5; cursor: pointer; display: inline-block;padding-top:5px;padding-left:7px;' onclick="window.location.href = localStorage.getItem('private_url') + '${b.link}'" aria-hidden="true"></i>` : ""}  <p style="margin-bottom: 0px;opacity: 0.50;display:inline-block;font-size: 14px; margin-left: 5px;" id='${index}_link_header'></p></span><p style="margin-bottom: 0px; margin-left: 5px;"><a class='accent' id='${index}_link' href="#"><br></a></p><p style="opacity: 0.50; margin-left: 5px; padding-bottom: 5px;" id='${index}_snippet'></p></div></div>`;
 							document.getElementById(`${index}_link_header`).textContent = b.link.split('/')[2];
 							document.getElementById(`${index}_link`).textContent = b.title;
