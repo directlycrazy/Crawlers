@@ -1,0 +1,7 @@
+{
+	"name": "Crawlers",
+	"description": "Crawl Google search results while protecting your privacy.",
+	"repository": "https://github.com/directlycrazy/Crawlers",
+	"logo": "https://raw.githubusercontent.com/directlycrazy/crawlers/main/assets/img/crawlers_round.png",
+	"stack": "heroku-20"
+}
