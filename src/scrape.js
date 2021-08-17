@@ -146,7 +146,13 @@ class Scrape {
 			weather.find({ search: this.query, degreeType: 'C' }, (err, data) => {
 				if (err) return rej();
 				if (data) {
-					return res({ current: data[0].current.temperature, location: data[0].current.observationpoint });
+					if (data[0]) {
+						return res({ current: data[0].current.temperature, location: data[0].current.observationpoint });
+					} else {
+						return rej();
+					}
+				} else {
+					return rej();
 				}
 			});
 		});

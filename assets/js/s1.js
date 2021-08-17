@@ -95,10 +95,10 @@ document.addEventListener('DOMContentLoaded', () => {
 				document.getElementById('credit').style.position = '';
 				document.getElementsByClassName('loader')[0].remove();
 				//weather
-				if (document.getElementById('search').value.includes('weather')) {
+				if (document.getElementById('search').value.toLowerCase().includes('weather')) {
 					if (document.getElementById('search').value.split(' ').length === 2) {
 						var temp = '';
-						if (document.getElementById('search').value.split(' ')[0] === 'weather') {
+						if (document.getElementById('search').value.split(' ')[0].toLowerCase() === 'weather') {
 							fetch('/results/weather?q=' + document.getElementById('search').value.split(' ')[1]).then(resp => resp.json()).then(data => {
 								temp = data.current;
 								document.getElementById('instant').innerHTML += `<div class="card" style='max-width: 600px; hyphens: auto; margin-bottom: 16px;'><div class="card-body color-dark" style="max-width: 48em;"><h4 class="card-title" id='weather_current'>${data.current}°</h4><span class="text-muted card-subtitle mb-2" style="float: right;"><a id='c_temp' class='accent' href='#'>C</a> | <a id='f_temp' class='accent' href='#'>F</a></span><h6 class="text-muted card-subtitle mb-2">In ${data.location}</h6></div></div>`;
