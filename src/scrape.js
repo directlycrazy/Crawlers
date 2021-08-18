@@ -8,7 +8,7 @@ class Scrape {
 		this.query = query;
 	}
 	all() {
-		return new Promise(res => {
+		return new Promise((res, rej) => {
 			//fetch page data
 			axios.get('https://www.google.com/search?q=' + this.query, {
 				headers: {
@@ -73,11 +73,34 @@ class Scrape {
 				} else {
 					return res({ results: results });
 				}
-			});
+			}).catch((e) => { rej(); });
+		});
+	}
+	duckducksearch(result_num) {
+		return new Promise((res, rej) => {
+			axios.get(`https://lite.duckduckgo.com/lite/?dc=${result_num}&q=${this.query}`, {
+				headers: {
+					'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
+				}
+			}).then(a => {
+				var $ = cheerio.load(a.data);
+
+				var results = [];
+
+				$('a.result-link').each((i, a) => {
+					var b = { title: a.data ? a.data : a.children[0].data, link: a.attribs.href, snippet: String($('td.result-snippet').eq(i).html()).trim().replace('\n', '') };
+
+					results.push(b);
+
+					return;
+				});
+
+				return res(results);
+			}).catch((e) => { rej(); });
 		});
 	}
 	images() {
-		return new Promise(res => {
+		return new Promise((res, rej) => {
 			axios.get('https://images.google.com/search?tbm=isch&q=' + this.query, {
 				headers: {
 					'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
@@ -114,6 +137,23 @@ class Scrape {
 				};
 
 				return res(flatten(contents.map(results)));
+			}).catch((e) => { rej(); });
+		});
+	}
+	weather() {
+		return new Promise((res, rej) => {
+			const weather = require('weather-js');
+			weather.find({ search: this.query, degreeType: 'C' }, (err, data) => {
+				if (err) return rej();
+				if (data) {
+					if (data[0]) {
+						return res({ current: data[0].current.temperature, location: data[0].current.observationpoint });
+					} else {
+						return rej();
+					}
+				} else {
+					return rej();
+				}
 			});
 		});
 	}
