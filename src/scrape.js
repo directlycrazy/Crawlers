@@ -10,7 +10,7 @@ class Scrape {
 	all() {
 		return new Promise((res, rej) => {
 			//fetch page data
-			axios.get('https://www.google.com/search?q=' + this.query, {
+			axios.get('https://www.google.com/search?gl=us&q=' + this.query, {
 				headers: {
 					'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:34.0) Gecko/20100101 Firefox/34.0"
 				}
@@ -101,7 +101,7 @@ class Scrape {
 	}
 	images() {
 		return new Promise((res, rej) => {
-			axios.get('https://images.google.com/search?tbm=isch&q=' + this.query, {
+			axios.get('https://google.com/search?tbm=isch&q=' + this.query, {
 				headers: {
 					'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"
 				}
