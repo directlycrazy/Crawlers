@@ -25,7 +25,7 @@ Install NodeJS from https://nodejs.org/en/
 
 Clone the GitHub repository using:
 ```
-git clone https://github.com/directlycrazy/Hyzen.git
+git clone https://github.com/directlycrazy/Crawlers.git
 ```
 
 Install required packages using:
