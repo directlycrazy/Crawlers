@@ -68,6 +68,7 @@ router.get('/weather', (req, res) => {
 
 router.get('/knowledge', (req, res) => {
   if (req.query.q) {
+    if (req.query.q.toLowerCase().includes('ip') && req.query.q.toLowerCase().includes('my')) return res.sendStatus(404);
     axios.get(`https://api.duckduckgo.com/?q=${req.query.q}&format=json`).then(a => {
       if (a.data.Abstract) {
         return res.json({

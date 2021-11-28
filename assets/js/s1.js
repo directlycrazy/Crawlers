@@ -94,6 +94,12 @@ document.addEventListener('DOMContentLoaded', () => {
 				document.getElementById('instant').innerHTML += `<p style='opacity: 0.5; padding-left: 5px;'>Response took ${(Math.abs(initiated_time - loaded_time) / 1000).toFixed(2)} seconds for ${a.results.length} results.</p></div>`;
 				document.getElementById('credit').style.position = '';
 				document.getElementsByClassName('loader')[0].remove();
+				//ip
+				if (document.getElementById('search').value.toLowerCase().includes('ip') && document.getElementById('search').value.toLowerCase().includes('my')) {
+					fetch('/ip').then(resp => resp.json()).then(data => {
+						document.getElementById('instant').innerHTML += `<div class="card" style='max-width: 600px; hyphens: auto; margin-bottom: 16px;'><div class="card-body color-dark" style="max-width: 48em;"><h4 class="card-title">Answer</h4><h6 class="text-muted card-subtitle mb-2">${data.ip}</h6></div></div>`;
+					});
+				}
 				//weather
 				if (document.getElementById('search').value.toLowerCase().includes('weather')) {
 					if (document.getElementById('search').value.split(' ').length === 2) {
