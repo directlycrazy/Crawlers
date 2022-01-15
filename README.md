@@ -13,9 +13,7 @@ Crawl Google search results while protecting your privacy.
 * Ability to load results from DuckDuckGo
 * Knowledge panels provided by DuckDuckGo
 
-# Public Instances
-* https://crawlers.securosmail.com
-* https://crawlers.securoscloud.ml
+# Public Instance(s)
 * https://crawlers.inspare.cc
 
 # Install
