@@ -246,7 +246,17 @@ document.addEventListener('DOMContentLoaded', () => {
 		document.getElementById('settings_form').addEventListener('submit', (e) => {
 			e.preventDefault();
 			settings.forEach((a, i) => {
-				localStorage.setItem(a.value, document.getElementById(a.value).value);
+				var b = ''
+				if (a.value === 'private_url') {
+					if (!document.getElementById(a.value).value.endsWith('/')) {
+						b = document.getElementById(a.value).value + '/'
+					} else {
+						b = document.getElementById(a.value).value
+					}
+				} else {
+					b = document.getElementById(a.value).value
+				}
+				localStorage.setItem(a.value, b);
 				if (i === settings.length - 1) {
 					window.location.reload();
 				}
