@@ -198,7 +198,9 @@ document.addEventListener('DOMContentLoaded', () => {
 					});
 					return;
 				});
-			}).catch((e) => { });
+			}).catch((e) => {
+				window.location.href = '/error';
+			});
 			$('#nav_all').attr('class', 'btn btn-outline-primary');
 		}
 		document.getElementById('nav_all').addEventListener('click', () => {
