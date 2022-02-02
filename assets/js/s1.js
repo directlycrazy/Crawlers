@@ -184,6 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
 								var a = document.getElementById(i + '_link');
 								if (a) {
 									if (a.attributes.href === b.link || a.innerHTML === b.title) {
+										document.getElementById('load_more_results').innerHTML = '<span style="width: 600px;">NO MORE RESULTS</span>';
 										return;
 									};
 								}
@@ -246,15 +247,15 @@ document.addEventListener('DOMContentLoaded', () => {
 		document.getElementById('settings_form').addEventListener('submit', (e) => {
 			e.preventDefault();
 			settings.forEach((a, i) => {
-				var b = ''
+				var b = '';
 				if (a.value === 'private_url') {
 					if (!document.getElementById(a.value).value.endsWith('/')) {
-						b = document.getElementById(a.value).value + '/'
+						b = document.getElementById(a.value).value + '/';
 					} else {
-						b = document.getElementById(a.value).value
+						b = document.getElementById(a.value).value;
 					}
 				} else {
-					b = document.getElementById(a.value).value
+					b = document.getElementById(a.value).value;
 				}
 				localStorage.setItem(a.value, b);
 				if (i === settings.length - 1) {
