@@ -46,4 +46,4 @@ node .
 
 [![Run on Repl](https://replit.com/badge/github/directlycrazy/Hyzen)](https://replit.com/github/directlycrazy/Crawlers)
 
-&copy; 2021 directlycrazy
+&copy; 2022 directlycrazy
