@@ -24,7 +24,7 @@
     "express": "^4.17.3",
     "express-rate-limit": "^5.5.0",
     "lodash.flatten": "^4.4.0",
-    "mocha": "^9.1.2",
+    "mocha": "^9.2.2",
     "querystring": "^0.2.1",
     "supertest": "^6.1.6",
     "weather-js": "^2.0.0"
