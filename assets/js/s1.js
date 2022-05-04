@@ -176,6 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 				//load extra results
 				document.getElementById('load_more_results').addEventListener('click', () => {
+					if (document.getElementById('load_more_results').innerHTML.includes('NO MORE RESULTS')) return;
 					fetch('/results/search/pages?q=' + params.get('q') + '&r=' + document.getElementById('results').childElementCount).then(resp => resp.json()).then((a) => {
 						var c = localStorage.getItem('private_url') ? true : false;
 						a.forEach((b, i) => {
