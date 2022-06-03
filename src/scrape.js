@@ -46,16 +46,14 @@ class Scrape {
 
 				$('div.ZINbbc > div:nth-child(1) > a > h3').contents().each((i, a) => {
 					var result_title = a.data ? a.data : a.children[0].data;
-					var result_link = $('div.ZINbbc > div:nth-child(1) > a')[link_index].attribs.href;
+					var result_link = $('div.ZINbbc > div.egMi0 > a')[link_index].attribs.href;
 					var result_snippet = $('#main > div > div > div > div:not(.v9i61e) > div.AP7Wnd')[i];
-
 					if (!(result_link.startsWith('/url?esrc=') || result_link.startsWith('http://www.google.com/url?esrc=') || result_link.startsWith('https://www.google.com/url?esrc='))) {
-						link_index++;
 						var c = $('div.ZINbbc > div:nth-child(1) > a')[link_index].attribs;
 						if (c) {
-							return result_link = c.href;
+							result_link = c.href;
 						} else {
-							return result_link = null;
+							result_link = null;
 						}
 					}
 
