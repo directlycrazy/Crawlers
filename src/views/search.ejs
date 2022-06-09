@@ -49,9 +49,7 @@
     <a style='padding-bottom: 16px;padding-left: 16px;' href='https://github.com/directlycrazy/Crawlers' target='_blank' id='credit'>Crawlers Build (???????)</a>
     <!-- custom themes -->
     <script>
-        if (localStorage.getItem('custom_css')) {
-            document.querySelector('#custom_css_element').innerHTML += localStorage.getItem('custom_css')
-        }
+        document.querySelector('#custom_css_element').innerHTML += localStorage.getItem('custom_css') ? localStorage.getItem('custom_css') : `:root {\n--dark: #36393e;\n--darker: #282b30;\n--text: #fff;\n--accent: #009688;\ncolor-scheme: dark;\n}`
     </script>
     <script src='/assets/js/math.js'></script>
     <script src="/assets/js/jquery.min.js"></script>

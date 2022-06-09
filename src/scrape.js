@@ -49,7 +49,7 @@ class Scrape {
 					var result_link = $('div.ZINbbc > div.egMi0 > a')[link_index].attribs.href;
 					var result_snippet = $('#main > div > div > div > div:not(.v9i61e) > div.AP7Wnd')[i];
 					if (!(result_link.startsWith('/url?esrc=') || result_link.startsWith('http://www.google.com/url?esrc=') || result_link.startsWith('https://www.google.com/url?esrc='))) {
-						var c = $('div.ZINbbc > div:nth-child(1) > a')[link_index].attribs;
+						var c = $('div.ZINbbc > div.egMi0 > a')[link_index].attribs;
 						if (c) {
 							result_link = c.href;
 						} else {
@@ -86,9 +86,15 @@ class Scrape {
 				var results = [];
 
 				$('a.result-link').each((i, a) => {
-					var b = { title: a.data ? a.data : a.children[0].data, link: a.attribs.href, snippet: String($('td.result-snippet').eq(i).html()).trim().replace('\n', '') };
+					var title = a.data ? a.data : a.children[0].data;
 
-					results.push(b);
+					if (title === 'EOF') {
+						return;
+					} else {
+						var b = { title: title, link: a.attribs.href, snippet: String($('td.result-snippet').eq(i).html()).trim().replace('\n', '') };
+
+						results.push(b);
+					}
 
 					return;
 				});
@@ -121,13 +127,18 @@ class Scrape {
 					var refs = [];
 					var re = /\["(http.+?)",(\d+),(\d+)\]/g;
 					var result;
+					var i = 0;
 					while ((result = re.exec(content)) !== null) {
 						if (result.length > 3) {
 							var ref = {
 								url: result[1]
 							};
 							if (!ref.url.includes('gstatic')) {
+								if ($('img.Q4LuWd')[i].attribs['data-src']) {
+									ref['compressed'] = $('img.rg_i.Q4LuWd')[i].attribs['data-src'];
+								}
 								refs.push(ref);
+								i++;
 							}
 						}
 					}

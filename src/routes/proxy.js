@@ -6,7 +6,10 @@ const router = express.Router();
 router.get('/', async (req, res) => {
 	if (req.query.q) {
 		axios.get(req.query.q, {
-			responseType: 'stream'
+			responseType: 'stream',
+			headers: {
+				'User-Agent': "Mozilla/5.0 (compatible; Crawlers/1.0; +https://inspare.cc)"
+			}
 		}).then((stream) => {
 			if (stream.headers['content-type'].includes('image') === false) return res.sendStatus(400);
 			if (Number(stream.headers['content-length']) > 8388608) return res.sendStatus(400);
