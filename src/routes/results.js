@@ -31,7 +31,7 @@ router.get('/search/pages', (req, res) => {
   if (req.query.q && req.query.r) {
     if (isNaN(req.query.r)) return res.redirect('/');
     a.duckducksearch(req.query.r).then(b => {
-      return res.json(b);
+      return res.json({"results" : b});
     }, () => {
       return res.sendStatus(500);
     });
